@@ -15,7 +15,7 @@ public class TranslateUtils {
     private static final String GOOGLE_TRANSLATE_API_URL = "https://clients5.google.com/translate_a/t";
     private static final String CLIENT = "dict-chrome-ex";
     public static final List<String> languages = List.of("ru", "en", "es", "fr", "de", "it", "pt", "zh-CN",
-            "ja","ko", "ar", "tr", "hi", "sv", "da", "fi", "no","cs", "pl", "hu");
+            "ja", "ko", "ar", "tr", "hi", "sv", "da", "fi", "no", "cs", "pl", "hu");
 
     public static String translateWord(LanguagesDto languages, String word) {
 

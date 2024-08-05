@@ -11,17 +11,12 @@ import org.springframework.ui.Model;
 import org.tinkoff.labwork.controller.TranslationController;
 import org.tinkoff.labwork.database.TranslationRequestRepository;
 import org.tinkoff.labwork.model.LanguagesDto;
-import org.tinkoff.labwork.model.TranslateDto;
 import org.tinkoff.labwork.model.TranslationResponseDto;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @Slf4j
 public class TranslateControllerTest {
