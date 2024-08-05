@@ -2,7 +2,7 @@ package org.tinkoff.labwork;
 
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
-import org.tinkoff.labwork.model.LanguagesDTO;
+import org.tinkoff.labwork.model.LanguagesDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,10 @@ public class TranslateUtils {
 
     private static final String GOOGLE_TRANSLATE_API_URL = "https://clients5.google.com/translate_a/t";
     private static final String CLIENT = "dict-chrome-ex";
+    public static final List<String> languages = List.of("ru", "en", "es", "fr", "de", "it", "pt", "zh-CN",
+            "ja","ko", "ar", "tr", "hi", "sv", "da", "fi", "no","cs", "pl", "hu");
 
-    public static String translateWord(LanguagesDTO languages, String word) {
+    public static String translateWord(LanguagesDto languages, String word) {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -34,7 +36,7 @@ public class TranslateUtils {
         return response.getBody().replaceAll("[\\[\\]]", "").replaceAll("\"", "");
     }
 
-    public static String getTranslatedText(LanguagesDTO languagesDTO) {
+    public static String getTranslatedText(LanguagesDto languagesDTO) {
 
         String[] words = languagesDTO.getTextToTranslate().split(" ");
 
@@ -59,6 +61,6 @@ public class TranslateUtils {
             }
         }
 
-        return stringBuilder.toString();
+        return stringBuilder.toString().trim();
     }
 }

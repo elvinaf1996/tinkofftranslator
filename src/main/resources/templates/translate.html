@@ -1,107 +1,109 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <title>Выбор языков перевода</title>
+    <meta charset="UTF-8">
+    <title>Переводчик</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .language-selection, .text-areas {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .language-selection label {
+            flex-basis: 100%;
+        }
+        select, textarea {
+            width: 45%;
+        }
+        .button-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: #fff;
             margin-top: 20px;
-            width: 25%;
         }
-
-        input, textarea, button {
-            margin: 5px;
-            padding: 5px;
-            width: 75%;
-        }
-
-        .error {
-            color: red;
-        }
-
         .translate-button {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-            display: inline-block;
+            margin: 0; /* Убираем отступы для центрации */
         }
     </style>
 </head>
 <body>
+
 <form method="POST" action="/translate">
     <h3>Выбор языков:</h3>
-    <label for="sourceLang">Исходный язык:</label>
-    <select name="sourceLang" id="sourceLang" autofocus>
-        <option value="" disabled selected>Выберите язык</option>
-        <option value="ru" th:selected="${sourceLang == 'ru'}">Русский</option>
-        <option value="en" th:selected="${sourceLang == 'en'}">Английский</option>
-        <option value="es" th:selected="${sourceLang == 'es'}">Испанский</option>
-        <option value="fr" th:selected="${sourceLang == 'fr'}">Французский</option>
-        <option value="de" th:selected="${sourceLang == 'de'}">Немецкий</option>
-        <option value="it" th:selected="${sourceLang == 'it'}">Итальянский</option>
-        <option value="pt" th:selected="${sourceLang == 'pt'}">Португальский</option>
-        <option value="zh-CN" th:selected="${sourceLang == 'zh-CN'}">Китайский (упрощенный)</option>
-        <option value="ja" th:selected="${sourceLang == 'ja'}">Японский</option>
-        <option value="ko" th:selected="${sourceLang == 'ko'}">Корейский</option>
-        <option value="ar" th:selected="${sourceLang == 'ar'}">Арабский</option>
-        <option value="tr" th:selected="${sourceLang == 'tr'}">Турецкий</option>
-        <option value="hi" th:selected="${sourceLang == 'hi'}">Хинди</option>
-        <option value="sv" th:selected="${sourceLang == 'sv'}">Шведский</option>
-        <option value="da" th:selected="${sourceLang == 'da'}">Датский</option>
-        <option value="fi" th:selected="${sourceLang == 'fi'}">Финский</option>
-        <option value="no" th:selected="${sourceLang == 'no'}">Норвежский</option>
-        <option value="cs" th:selected="${sourceLang == 'cs'}">Чешский</option>
-        <option value="pl" th:selected="${sourceLang == 'pl'}">Польский</option>
-        <option value="hu" th:selected="${sourceLang == 'hu'}">Венгерский</option>
-    </select>
-    <label for="targetLang">Язык перевода:</label>
-    <select name="targetLang" id="targetLang" autofocus>
-        <option value="" disabled selected>Выберите язык</option>
-        <option value="ru" th:selected="${targetLang == 'ru'}">Русский</option>
-        <option value="en" th:selected="${targetLang == 'en'}">Английский</option>
-        <option value="es" th:selected="${targetLang == 'es'}">Испанский</option>
-        <option value="fr" th:selected="${targetLang == 'fr'}">Французский</option>
-        <option value="de" th:selected="${targetLang == 'de'}">Немецкий</option>
-        <option value="it" th:selected="${targetLang == 'it'}">Итальянский</option>
-        <option value="pt" th:selected="${targetLang == 'pt'}">Португальский</option>
-        <option value="zh-CN" th:selected="${targetLang == 'zh-CN'}">Китайский (упрощенный)</option>
-        <option value="ja" th:selected="${targetLang == 'ja'}">Японский</option>
-        <option value="ko" th:selected="${targetLang == 'ko'}">Корейский</option>
-        <option value="ar" th:selected="${targetLang == 'ar'}">Арабский</option>
-        <option value="tr" th:selected="${targetLang == 'tr'}">Турецкий</option>
-        <option value="hi" th:selected="${targetLang == 'hi'}">Хинди</option>
-        <option value="sv" th:selected="${targetLang == 'sv'}">Шведский</option>
-        <option value="da" th:selected="${targetLang == 'da'}">Датский</option>
-        <option value="fi" th:selected="${targetLang == 'fi'}">Финский</option>
-        <option value="no" th:selected="${targetLang == 'no'}">Норвежский</option>
-        <option value="cs" th:selected="${targetLang == 'cs'}">Чешский</option>
-        <option value="pl" th:selected="${targetLang == 'pl'}">Польский</option>
-        <option value="hu" th:selected="${targetLang == 'hu'}">Венгерский</option>
-    </select>
-    <h3>Исходный текст:</h3>
-    <textarea name="textToTranslate" placeholder="Введите текст для перевода" rows="5" th:text="${inputText}"></textarea>
-    <button class="translate-button" type="submit" th:m style="margin-top: 20px;">Перевести</button>
-    <h3>Текст перевода:</h3>
-    <textarea name="translationResult" placeholder="Тут будет текст перевода" rows="5" readonly th:text="${translation}"></textarea>
+    <div class="language-selection">
+        <div>
+            <label for="sourceLang">Исходный язык:</label>
+            <select name="sourceLang" id="sourceLang" autofocus>
+                <option value="" disabled selected>Выберите язык</option>
+                <option value="ru" th:selected="${sourceLang == 'ru'}">Русский</option>
+                <option value="en" th:selected="${sourceLang == 'en'}">Английский</option>
+                <option value="es" th:selected="${sourceLang == 'es'}">Испанский</option>
+                <option value="fr" th:selected="${sourceLang == 'fr'}">Французский</option>
+                <option value="de" th:selected="${sourceLang == 'de'}">Немецкий</option>
+                <option value="it" th:selected="${sourceLang == 'it'}">Итальянский</option>
+                <option value="pt" th:selected="${sourceLang == 'pt'}">Португальский</option>
+                <option value="zh-CN" th:selected="${sourceLang == 'zh-CN'}">Китайский (упрощенный)</option>
+                <option value="ja" th:selected="${sourceLang == 'ja'}">Японский</option>
+                <option value="ko" th:selected="${sourceLang == 'ko'}">Корейский</option>
+                <option value="ar" th:selected="${sourceLang == 'ar'}">Арабский</option>
+                <option value="tr" th:selected="${sourceLang == 'tr'}">Турецкий</option>
+                <option value="hi" th:selected="${sourceLang == 'hi'}">Хинди</option>
+                <option value="sv" th:selected="${sourceLang == 'sv'}">Шведский</option>
+                <option value="da" th:selected="${sourceLang == 'da'}">Датский</option>
+                <option value="fi" th:selected="${sourceLang == 'fi'}">Финский</option>
+                <option value="no" th:selected="${sourceLang == 'no'}">Норвежский</option>
+                <option value="cs" th:selected="${sourceLang == 'cs'}">Чешский</option>
+                <option value="pl" th:selected="${sourceLang == 'pl'}">Польский</option>
+                <option value="hu" th:selected="${sourceLang == 'hu'}">Венгерский</option>
+            </select>
+        </div>
+        <div>
+            <label for="targetLang">Язык перевода:</label>
+            <select name="targetLang" id="targetLang" autofocus>
+                <option value="" disabled selected>Выберите язык</option>
+                <option value="ru" th:selected="${targetLang == 'ru'}">Русский</option>
+                <option value="en" th:selected="${targetLang == 'en'}">Английский</option>
+                <option value="es" th:selected="${targetLang == 'es'}">Испанский</option>
+                <option value="fr" th:selected="${targetLang == 'fr'}">Французский</option>
+                <option value="de" th:selected="${targetLang == 'de'}">Немецкий</option>
+                <option value="it" th:selected="${targetLang == 'it'}">Итальянский</option>
+                <option value="pt" th:selected="${targetLang == 'pt'}">Португальский</option>
+                <option value="zh-CN" th:selected="${targetLang == 'zh-CN'}">Китайский (упрощенный)</option>
+                <option value="ja" th:selected="${targetLang == 'ja'}">Японский</option>
+                <option value="ko" th:selected="${targetLang == 'ko'}">Корейский</option>
+                <option value="ar" th:selected="${targetLang == 'ar'}">Арабский</option>
+                <option value="tr" th:selected="${targetLang == 'tr'}">Турецкий</option>
+                <option value="hi" th:selected="${targetLang == 'hi'}">Хинди</option>
+                <option value="sv" th:selected="${targetLang == 'sv'}">Шведский</option>
+                <option value="da" th:selected="${targetLang == 'da'}">Датский</option>
+                <option value="fi" th:selected="${targetLang == 'fi'}">Финский</option>
+                <option value="no" th:selected="${targetLang == 'no'}">Норвежский</option>
+                <option value="cs" th:selected="${targetLang == 'cs'}">Чешский</option>
+                <option value="pl" th:selected="${targetLang == 'pl'}">Польский</option>
+                <option value="hu" th:selected="${targetLang == 'hu'}">Венгерский</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="text-areas">
+        <h3 style="flex-basis: 50%; text-align: left;">Исходный текст:</h3>
+        <h3 style="flex-basis: 50%; text-align: right;">Текст перевода:</h3>
+    </div>
+
+    <div class="text-areas">
+        <textarea name="textToTranslate" placeholder="Введите текст для перевода" rows="5" th:text="${inputText}"></textarea>
+        <textarea name="translationResult" placeholder="Тут будет текст перевода" rows="5" readonly th:text="${translation}"></textarea>
+    </div>
+
+    <div class="button-container">
+        <button class="translate-button" type="submit">Перевести</button>
+    </div>
+
     <p th:if="${param.error != null}" class="error">Ошибка перевода</p>
 </form>
+
 </body>
 </html>
