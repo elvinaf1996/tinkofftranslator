@@ -30,7 +30,8 @@ public class TranslationController {
     }
 
     @PostMapping("/translate")
-    public ResponseEntity<String> translateApi(@Valid @RequestBody LanguagesDto languagesDTO, BindingResult result, HttpServletRequest request) {
+    public ResponseEntity<String> translateApi(@Valid @RequestBody LanguagesDto languagesDTO, BindingResult result,
+                                               HttpServletRequest request) {
         if (result.hasErrors()) {
             List<String> errorsList = result.getAllErrors().stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
@@ -38,11 +39,13 @@ public class TranslationController {
 
             return ResponseEntity.badRequest().body(String.join(", ", errorsList));
         }
+
         if (languagesDTO.getSourceLang().equalsIgnoreCase(languagesDTO.getTargetLang())) {
             return ResponseEntity.badRequest().body("Языки перевода совпадают");
         }
 
-        String translatedText = translationService.getTranslatedText(languagesDTO.getSourceLang(), languagesDTO.getTargetLang(), languagesDTO.getTextToTranslate());
+        String translatedText = translationService.getTranslatedText(languagesDTO.getSourceLang(), languagesDTO.getTargetLang(),
+                languagesDTO.getTextToTranslate());
 
         translationService.saveTranslation(request.getRemoteAddr(),
                 languagesDTO.getSourceLang(), languagesDTO.getTargetLang(), languagesDTO.getTextToTranslate(),

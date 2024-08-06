@@ -24,6 +24,7 @@ public class TranslationResponseDto {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         TranslationResponseDto that = (TranslationResponseDto) object;
-        return Objects.equals(code, that.code) && Objects.equals(translatedText, that.translatedText) && Objects.equals(errorMessage, that.errorMessage);
+        return Objects.equals(code, that.code) && Objects.equals(translatedText, that.translatedText)
+                && Objects.equals(errorMessage, that.errorMessage);
     }
 }

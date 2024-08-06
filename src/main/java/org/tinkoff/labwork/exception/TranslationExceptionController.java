@@ -27,5 +27,4 @@ public class TranslationExceptionController {
     protected ResponseEntity<Object> handleAllException(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
     }
-
 }
