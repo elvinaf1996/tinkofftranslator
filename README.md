@@ -12,7 +12,6 @@
 
 - Java
 - Spring Framework
-- Thymeleaf
 - Lombok
 - RestTemplate
 - JDBC
@@ -23,12 +22,7 @@
 ```bash
 git clone https://github.com/elvinaf1996/final_task_itis.git
 ```
-2. Добавьте себе базу данных в pgAdmin (
-   1. Откройте pgAdmin 4 и подключитесь к своему серверу.
-   2. Создайте новую базу данных с именем translate.
-   3. Щелкните правой кнопкой мыши по базе данных и выберите Restore....
-   4. Укажите файл резервной копии (лежит по пути src/main/resources/database/translateDb.sql)
-   5. Нажмите Restore и дождитесь завершения процесса.)
+2. В application.properties укажите username и password для подключения к вашей бд
 3. Запустите приложение с помощью Maven:
 ```bash
 mvn spring-boot:run
@@ -36,7 +30,7 @@ mvn spring-boot:run
 4. Для просмотра веб: перейдите по адресу `http://localhost:8080/`.
 5. Для отправки запросов в бек используйте запросы: 
 ```bash
-curl --location 'http://localhost:8080/translate/api' \
+curl --location 'http://localhost:8080/translate' \
 --header 'Content-Type: application/json' \
 --data '{
     "sourceLang": "ru",
